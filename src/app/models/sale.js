@@ -1,17 +1,14 @@
-'use strict';
-const config = require('../../config/environment');
+"use strict";
+const config = require("../../config/environment");
 
 module.exports = (sequelize, Sequelize) => {
-    const Sale = sequelize.define('Sale', {
-        name: Sequelize.STRING
-    }, {
-    	freezeTableName: true
+  const Sale = sequelize.define("Sale", {
+    name: Sequelize.STRING,
+  });
 
-    });
+  Sale.associate = function (models) {
+    Sale.hasMany(models.Product, { foreignKey: "saleId" });
+  };
 
-    Sale.associate = function (models) {
-    	Sale.hasMany(models.Product, {as: 'products'})
-    };
-
-    return Sale;
+  return Sale;
 };

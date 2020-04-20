@@ -1,11 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
-const controller = require("../controllers/shoppingCart.controller");
+const controller = require("../controllers/sale.controller");
 
 router.post("/", controller.create);
-router.post("/:id/product", controller.addProduct);
-router.put("/", controller.edit);
 router.get("/:id", controller.getById);
 router.get("/", controller.getAll);
 

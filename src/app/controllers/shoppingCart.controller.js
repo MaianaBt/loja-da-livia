@@ -54,9 +54,12 @@ const edit = async (req, res) => {
 
 const addProduct = async (req, res) => {
   try {
-    let body = req.body;
-    body["cartId"] = req.params.id;
-    const result = await service.addProduct(body);
+    const cartId = req.params.id;
+    const params = {
+      ...req.body,
+      cartId,
+    };
+    const result = await service.addProduct(params);
 
     return res.json(result);
   } catch (e) {
@@ -66,10 +69,46 @@ const addProduct = async (req, res) => {
   }
 };
 
+const removeProduct = async (req, res) => {
+  try {
+    const cartId = req.params.id;
+    const productId = req.params.productId;
+    const result = await service.removeProduct({ cartId, productId });
+
+    return res.json(result);
+  } catch (e) {
+    log.error("Erro ao remover produto. ", "", e.message || e.msg);
+    res.status(500);
+    res.json({ msg: "Erro ao remover produto. " + (e.message || e.msg) });
+  }
+};
+
+const editProduct = async (req, res) => {
+  try {
+    const cartId = req.params.id;
+    const { productId } = req.params;
+    const { quantity } = req.body;
+
+    const result = await service.editProduct({
+      cartId,
+      productId,
+      quantity,
+    });
+
+    return res.json(result);
+  } catch (e) {
+    log.error("Erro ao editar produto. ", "", e.message || e.msg);
+    res.status(500);
+    res.json({ msg: "Erro ao editar produto. " + (e.message || e.msg) });
+  }
+};
+
 module.exports = {
   create,
   getById,
   getAll,
   edit,
   addProduct,
+  removeProduct,
+  editProduct,
 };

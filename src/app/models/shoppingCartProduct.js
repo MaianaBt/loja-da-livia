@@ -1,5 +1,4 @@
 "use strict";
-const config = require("../../config/environment");
 
 module.exports = (sequelize, Sequelize) => {
   const ShoppingCartProduct = sequelize.define("ShoppingCartProduct", {

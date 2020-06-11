@@ -1,6 +1,6 @@
 ## Preparação do ambiente
 
-Instale o banco de dados MySQL e crie o banco `duuo`.
+Instale o banco de dados MySQL e crie o banco `mystore`.
 
 Crie o diretório `logs` na raiz do projeto, a mesma não é criada automaticamente e será utilizada pelo serviço de log.
 

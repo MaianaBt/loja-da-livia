@@ -1,6 +1,4 @@
 "use strict";
-const config = require("../../config/environment");
-
 module.exports = (sequelize, Sequelize) => {
   const Product = sequelize.define("Product", {
     name: Sequelize.STRING,
@@ -10,10 +8,9 @@ module.exports = (sequelize, Sequelize) => {
 
   Product.associate = function (models) {
     Product.belongsTo(models.Sale, { foreignKey: "saleId", as: "sale" });
-    Product.belongsToMany(models.Product, {
-      through: "ShoppingCartProduct",
+    Product.belongsToMany(models.ShoppingCart, {
+      through: "ShoppingCartProducts",
       foreignKey: "productId",
-      as: "products",
     });
   };
 
